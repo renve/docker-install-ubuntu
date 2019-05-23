@@ -1,7 +1,12 @@
 #!/bin/bash
 
+#remove docker if needed 
+#sudo apt-get remove docker docker-engine docker.io containerd runc
+
+sudo apt-get update -y
+
 echo "installing docker dependencies"
-sudo apt-get install \
+sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -23,18 +28,20 @@ sudo add-apt-repository \
 sleep 2
 
 echo "updating"
-sudo apt-get update
-
+sudo apt-get update -y
 echo "installing docker"
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+#add user to docker group to avoid typing sudo docker
+#sudo usermod -aG docker $USER 
 
 #Install link for docker-machine
 #https://docs.docker.com/machine/install-machine/
-base=https://github.com/docker/machine/releases/download/v0.16.0 &&
-  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-  sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+#base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+#  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+#  sudo install /tmp/docker-machine /usr/local/bin/docker-machine
 
 #Install docker compose and add executable
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+#sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#sudo chmod +x /usr/local/bin/docker-compose
 
