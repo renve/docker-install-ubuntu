@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #remove docker if needed 
-#sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove docker docker-engine docker.io containerd runc
 
 sudo apt-get update -y
 
@@ -32,8 +32,13 @@ sudo apt-get update -y
 echo "installing docker"
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+sleep 1
+
 #add user to docker group to avoid typing sudo docker
-#sudo usermod -aG docker $USER 
+sudo usermod -aG docker $USER 
+
+#reboot
+sudo reboot now
 
 #Install link for docker-machine
 #https://docs.docker.com/machine/install-machine/
